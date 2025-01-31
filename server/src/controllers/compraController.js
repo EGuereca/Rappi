@@ -8,6 +8,10 @@ const getCompras = async (req, res) => {
 
 const createCompra = async (req, res) => {
     const { ClienteId, RepartidorId, estado, total } = req.body;
+    const checkCompra = await Compra.findOne({ where: { ClienteId, estado: 'pendiente' } });
+    if (checkCompra) {
+        return res.status(400).json({ error: 'Ya tienes una compra pendiente' });
+    }
     const compra = await Compra.create({ ClienteId, RepartidorId, estado, total });
     res.json(compra);
 };
