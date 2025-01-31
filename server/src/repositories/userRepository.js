@@ -1,28 +1,15 @@
-const fs = require('fs-extra');
-const path = require('path');
-
-//Ruta actualizada para el archivo de db.json
-const DB_PATH = path.join(__dirname, '../../database/db.json');
+const User = require('../models/userModel');
 
 const getUsers = async () => {
-    const data = await fs.readJson(DB_PATH);
-    return data.users;
-}
-
-const saveUser = async (user) => {
-    const data = { user }
-    await fs.writeJson(DB_PATH, data, { spaces: 2 });
+    return await User.findAll();
 }
 
 const findUserByEmail = async (email) => {
-    const users = await getUsers();
-    return users.find(user => user.email === email);
+    return await User.findOne({ where: { email } });
 }
 
 const addUser = async (user) => {
-    const users = await getUsers();
-    users.push(user);
-    await saveUser(users);
+    return await User.create(user);
 }
 
 module.exports = {

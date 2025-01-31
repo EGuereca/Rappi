@@ -4,7 +4,15 @@
   "description": "Ejemplo de desarrollo en paralelo de un servidor de login",
   "main": "index.js",
   "scripts": {
-    "test": "nodemon app.js"
+    "start": "nodemon index.ts",
+    "dev": "nodemon index.ts",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "migrate": "cd ./database && npx sequelize-cli db:migrate",
+    "create:migration": "cd ./database && npx sequelize-cli migration:generate --name",
+    "create:seed": "cd ./database && npx sequelize-cli seed:generate --name",
+    "migrate:undo": "cd ./database && npx sequelize-cli db:migrate:undo",
+    "seed:undo": "cd ./database && npx sequelize-cli db:seed:undo",
+    "seed:all": "cd ./database && npx sequelize-cli db:seed:all"
   },
   "author": "",
   "license": "ISC",
@@ -14,7 +22,11 @@
     "cors": "^2.8.5",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
-    "fs-extra": "^11.2.0",
-    "jsonwebtoken": "^9.0.2"
-  }
+    "fs-extra": "^11.3.0",
+    "jsonwebtoken": "^9.0.2",
+    "mysql2": "^3.12.0",
+    "sequelize": "^6.37.5"
+  },
+  "devDependencies": {},
+  "keywords": []
 }
