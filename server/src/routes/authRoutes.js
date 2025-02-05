@@ -10,7 +10,6 @@ router.post('/register', [
     check('password').isLength({ min: 6 }).withMessage('La contraseña debe tener al menos 6 caracteres'),
     check('role').isIn(['cliente', 'repartidor']).withMessage('El rol debe ser cliente o repartidor')
 ], authController.registerUser);
-
 router.post('/login', authController.login);
 
 module.exports = router;
